@@ -32,7 +32,7 @@ X = df.drop('Travel_modes', axis=1)
 y = df['Travel_modes']
 
 # Split the data into training and testing sets
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=42)
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
 
 # Identify categorical columns
 categorical_cols = X.select_dtypes(include=['object']).columns.tolist()
