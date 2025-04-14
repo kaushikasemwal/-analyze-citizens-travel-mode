@@ -7,6 +7,8 @@ from sklearn.compose import ColumnTransformer
 from sklearn.pipeline import make_pipeline
 from sklearn.metrics import accuracy_score, classification_report
 import matplotlib.pyplot as plt
+from sklearn.tree import export_graphviz
+import graphviz
 
 # Load the dataset
 df = pd.read_csv(r'c:\Users\maitr\OneDrive\Documents\Kaushika\OT Project\table__84710ENG.csv')
@@ -58,3 +60,24 @@ y_pred = pipeline.predict(X_test)
 # Evaluate the model
 print("Model Accuracy:", accuracy_score(y_test, y_pred))
 print(classification_report(y_test, y_pred))
+
+# Scatter Plot with Best Fit Line (using training data for fit)
+distance_travelled = X_train['Distance_travelled__passenger_kilometres__']  # Use X_train
+travel_modes = y_train  # Use y_train
+
+plt.figure(figsize=(10, 6)) # Adjust figure size for better visualization
+plt.scatter(distance_travelled, travel_modes, color='blue', label='Data Points')
+
+# Fit a best-fit line using numpy polyfit
+coefficients = np.polyfit(distance_travelled, travel_modes, 1)  # Linear fit
+best_fit_line = np.poly1d(coefficients)
+
+# Plot the best-fit line
+plt.plot(distance_travelled, best_fit_line(distance_travelled), color='red', label='Best Fit Line')
+
+plt.xlabel('Distance Travelled (Passenger Kilometres)')
+plt.ylabel('Travel Modes')
+plt.title('Scatter Plot with Best Fit Line in Random Forest')
+plt.legend()
+plt.grid(True)  # Add grid for easier readability
+plt.show()

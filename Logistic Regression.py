@@ -76,7 +76,7 @@ plt.plot(distance_travelled, best_fit_line(distance_travelled), color='red', lab
 # Add labels and legend
 plt.xlabel('Distance Travelled (Passenger Kilometres)')
 plt.ylabel('Travel Modes')
-plt.title('Scatter Plot with Best Fit Line')
+plt.title('Scatter Plot with Best Fit Line in Logistic Regression')
 plt.legend()
 
 # Show the plot
