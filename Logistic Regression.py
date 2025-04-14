@@ -6,6 +6,7 @@ from sklearn.preprocessing import StandardScaler, OneHotEncoder, LabelEncoder
 from sklearn.compose import ColumnTransformer
 from sklearn.pipeline import make_pipeline
 from sklearn.metrics import accuracy_score, classification_report
+import matplotlib.pyplot as plt
 
 # Load the dataset
 df = pd.read_csv(r'c:\Users\maitr\OneDrive\Documents\Kaushika\OT Project\table__84710ENG.csv')
@@ -57,3 +58,26 @@ y_pred = pipeline.predict(X_test)
 # Evaluate the model
 print("Model Accuracy:", accuracy_score(y_test, y_pred))
 print(classification_report(y_test, y_pred))
+
+# Extract relevant data for plotting
+distance_travelled = df['Distance_travelled__passenger_kilometres__']
+travel_modes = df['Travel_modes']
+
+# Create scatter plot
+plt.scatter(distance_travelled, travel_modes, color='blue', label='Data Points')
+
+# Fit a best-fit line using numpy polyfit
+coefficients = np.polyfit(distance_travelled, travel_modes, 1)  # Linear fit
+best_fit_line = np.poly1d(coefficients)
+
+# Plot the best-fit line
+plt.plot(distance_travelled, best_fit_line(distance_travelled), color='red', label='Best Fit Line')
+
+# Add labels and legend
+plt.xlabel('Distance Travelled (Passenger Kilometres)')
+plt.ylabel('Travel Modes')
+plt.title('Scatter Plot with Best Fit Line')
+plt.legend()
+
+# Show the plot
+plt.show()
